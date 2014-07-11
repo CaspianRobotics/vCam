@@ -24,10 +24,6 @@ class Ui_MainWindow(object):
         self.frameLabel.setAutoFillBackground(True)
         self.frameLabel.setIndent(-1)
         self.frameLabel.setObjectName("frameLabel")
-
-        # self.text_area = QtGui.QTextBrowser(self.centralwidget)
-        # self.text_area.setGeometry(QtCore.QRect(40, 510, 100, 100))
-
         self.startButton = QtGui.QPushButton(self.centralwidget)
         self.startButton.setGeometry(QtCore.QRect(40, 510, 114, 32))
         self.startButton.setObjectName("startButton")
@@ -57,7 +53,7 @@ class Ui_MainWindow(object):
         self.create_connection()
         self._timer = QtCore.QTimer(MainWindow)
     	self._timer.timeout.connect(self.draw_images)
-    	self._timer.start(27)
+    	self._timer.start(100)
     	MainWindow.update()
 
     def retranslateUi(self, MainWindow):
@@ -79,31 +75,15 @@ class Ui_MainWindow(object):
     def create_connection(self):
     	print "start"
         self._connect = Connection()
-    #     print "connected"
+        print "connected"
         ip_stream = self._connect.get_ip_stream("startLiveview")
-    #     print ip_stream
         self._package = DataProcessing(ip_stream)
 
 
     def draw_images(self):
-    	# print "I'm here"
-    	# print datetime.datetime.now()
-    	# self.text_area.setText(str(datetime.datetime.now()))
-        # print "start"
-        # connect = Connection()
-    #     print "connected"
-        # ip_stream = connect.get_ip_stream("startLiveview")
-    #     print ip_stream
-        # package = DataProcessing(ip_stream)
-    #     # while True:
         opencv_img = self._package.grab_image()
-    #         # cv2.imshow('Video', opencv_img)
-    #         # if cv2.waitKey(10) == 27:
-				# # break
         qt_img = self.convertFrame(opencv_img)
         self.frameLabel.setPixmap(qt_img)
-        # self.frameLabel.update()
-
 
 
 

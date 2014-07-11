@@ -35,4 +35,5 @@ class DataProcessing:
 		img_str = self.unpack_package()
 		nparr = np.fromstring(img_str, np.uint8)
 		img = cv2.imdecode(nparr, cv2.CV_LOAD_IMAGE_COLOR)
+		cv2.cvtColor(img, cv2.cv.CV_BGR2RGB, img)
 		return img 
