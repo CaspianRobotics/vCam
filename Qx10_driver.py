@@ -30,6 +30,7 @@ if len(sys.argv) > 1:
     params["method"] = sys.argv[1]
     if len(sys.argv) > 2:
         params["params"] = [int_or_str(v) for v in sys.argv[2:]]
+        print params
 
 dic = urllib2.urlopen("http://10.0.0.1:10000/sony/camera",
     json.dumps(params)).read()
